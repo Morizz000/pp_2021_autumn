@@ -3,6 +3,7 @@
 
 #include <mpi.h>
 
+#include <climits>
 #include <algorithm>
 #include <random>
 #include <string>
