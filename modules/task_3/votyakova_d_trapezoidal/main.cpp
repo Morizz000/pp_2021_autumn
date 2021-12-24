@@ -46,25 +46,14 @@ TEST(Trapezoidal_method_MPI, TEST_1) {
   int rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  ABs limits = {{0, 2}};
-  int n = 100;
+  ABs abs = {{0, 2}};
+  int segments = 100;
 
   double start, end;
-  if (rank == 0) start = MPI_Wtime();
-  double parallel_integral = ParallelTrapezoidal(n, limits, f1);
-  if (rank == 0) end = MPI_Wtime();
+  double parallel_integral = ParallelTrapezoidal(segments, abs, f1);
 
   if (rank == 0) {
-    double ptime = end - start;
-    cout << "P time: " << ptime << endl;
-
-    start = MPI_Wtime();
-    double sequential_integral = SequentialTrapezoidal(n, limits, f1);
-    end = MPI_Wtime();
-
-    double stime = end - start;
-    cout << "S time: " << stime << endl;
-    cout << "Speedup: " << stime / ptime << endl;
+    double sequential_integral = SequentialTrapezoidal(segments, abs, f1);
 
     ASSERT_NEAR(sequential_integral, parallel_integral, error);
   }
@@ -74,25 +63,13 @@ TEST(Trapezoidal_method_MPI, TEST_2) {
   int rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  ABs limits = {{0, 2}, {-1, 5}};
-  int n = 50;
+  ABs abs = {{0, 2}, {-1, 5}};
+  int segments = 50;
 
-  double start, end;
-  if (rank == 0) start = MPI_Wtime();
-  double parallel_integral = ParallelTrapezoidal(n, limits, f2);
-  if (rank == 0) end = MPI_Wtime();
+  double parallel_integral = ParallelTrapezoidal(segments, abs, f2);
 
   if (rank == 0) {
-    double ptime = end - start;
-    cout << "P time: " << ptime << endl;
-
-    start = MPI_Wtime();
-    double sequential_integral = SequentialTrapezoidal(n, limits, f2);
-    end = MPI_Wtime();
-
-    double stime = end - start;
-    cout << "S time: " << stime << endl;
-    cout << "Speedup: " << stime / ptime << endl;
+    double sequential_integral = SequentialTrapezoidal(segments, abs, f2);
 
     ASSERT_NEAR(sequential_integral, parallel_integral, error);
   }
@@ -102,25 +79,13 @@ TEST(Trapezoidal_method_MPI, TEST_3) {
   int rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  ABs limits = {{0, 2}, {1, 3}};
-  int n = 75;
+  ABs abs = {{0, 2}, {1, 3}};
+  int segments = 100;
 
-  double start, end;
-  if (rank == 0) start = MPI_Wtime();
-  double parallel_integral = ParallelTrapezoidal(n, limits, f3);
-  if (rank == 0) end = MPI_Wtime();
+  double parallel_integral = ParallelTrapezoidal(segments, abs, f3);
 
   if (rank == 0) {
-    double ptime = end - start;
-    cout << "P time: " << ptime << endl;
-
-    start = MPI_Wtime();
-    double sequential_integral = SequentialTrapezoidal(n, limits, f3);
-    end = MPI_Wtime();
-
-    double stime = end - start;
-    cout << "S time: " << stime << endl;
-    cout << "Speedup: " << stime / ptime << endl;
+    double sequential_integral = SequentialTrapezoidal(segments, abs, f3);
 
     ASSERT_NEAR(sequential_integral, parallel_integral, error);
   }
@@ -130,25 +95,13 @@ TEST(Trapezoidal_method_MPI, TEST_4) {
   int rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  ABs limits = {{0, 2}, {1, 3}, {-2, 3}};
-  int n = 10;
+  ABs abs = {{0, 2}, {1, 3}, {-2, 3}};
+  int segments = 10;
 
-  double start, end;
-  if (rank == 0) start = MPI_Wtime();
-  double parallel_integral = ParallelTrapezoidal(n, limits, f4);
-  if (rank == 0) end = MPI_Wtime();
+  double parallel_integral = ParallelTrapezoidal(segments, abs, f4);
 
   if (rank == 0) {
-    double ptime = end - start;
-    cout << "P time: " << ptime << endl;
-
-    start = MPI_Wtime();
-    double sequential_integral = SequentialTrapezoidal(n, limits, f4);
-    end = MPI_Wtime();
-
-    double stime = end - start;
-    cout << "S time: " << stime << endl;
-    cout << "Speedup: " << stime / ptime << endl;
+    double sequential_integral = SequentialTrapezoidal(segments, abs, f4);
 
     ASSERT_NEAR(sequential_integral, parallel_integral, error);
   }
@@ -158,12 +111,12 @@ TEST(Trapezoidal_method_MPI, TEST_5) {
   int rank;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  ABs limits = {{0, 2}, {6, 7}, {-5, 1}};
-  int n = 100;
+  ABs abs = {{0, 2}, {6, 7}, {5, 10}};
+  int segments = 10;
 
   double start, end;
   if (rank == 0) start = MPI_Wtime();
-  double parallel_integral = ParallelTrapezoidal(n, limits, f1);
+  double parallel_integral = ParallelTrapezoidal(segments, abs, f5);
   if (rank == 0) end = MPI_Wtime();
 
   if (rank == 0) {
@@ -171,7 +124,7 @@ TEST(Trapezoidal_method_MPI, TEST_5) {
     cout << "P time: " << ptime << endl;
 
     start = MPI_Wtime();
-    double sequential_integral = SequentialTrapezoidal(n, limits, f1);
+    double sequential_integral = SequentialTrapezoidal(segments, abs, f5);
     end = MPI_Wtime();
 
     double stime = end - start;
