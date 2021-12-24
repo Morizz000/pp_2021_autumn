@@ -4,14 +4,16 @@
 
 #include <cmath>
 #include <functional>
-#include <vector>
 #include <utility>
+#include <vector>
 
-using std::vector;
+using std::function;
 using std::pair;
+using std::vector;
 
-double getSequentialTrapezoidal(int n, vector<pair<double, double>> limits,
-                                function<double(vector<double>)> f);
-double getParallelTrapezoidal(int n, vector<pair<double, double>> limits,
-                              const function<double(vector<double>)> f);
+typedef vector<pair<double, double>> ABs;
+typedef function<double(vector<double>)> func;
+
+double SequentialTrapezoidal(int segments, ABs ab, func fn);
+double ParallelTrapezoidal(int segments, ABs ab, const func fn);
 #endif  // MODULES_TASK_3_VOTYAKOVA_D_TRAPEZOIDAL_TRAPEZOIDAL_H_
