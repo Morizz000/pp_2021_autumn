@@ -49,7 +49,6 @@ TEST(Trapezoidal_method_MPI, TEST_1) {
   ABs abs = {{0, 2}};
   int segments = 100;
 
-  double start, end;
   double parallel_integral = ParallelTrapezoidal(segments, abs, f1);
 
   if (rank == 0) {
